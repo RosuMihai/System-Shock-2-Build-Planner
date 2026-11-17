@@ -1,0 +1,75 @@
+{
+  "_comment": "Psionic disciplines from PSIHELP.STR. Each tier has a Neural Capacity entry (must be bought first) followed by seven disciplines, in the order the Psi Upgrade Unit lays them out (two columns, left to right). 'maxPsiBonus' is the extra maximum psi points the tier's Neural Capacity grants. 'icon' is the PICNxx base name.",
+  "tiers": [
+    {
+      "tier": 1,
+      "maxPsiBonus": 2,
+      "capacity": { "id": "psi0", "icon": "picn00", "name": "First Tier Neural Capacity", "desc": "This is required for First Tier psionic disciplines. It increases your maximum psi points by 2. All First Tier disciplines cost 1 psi point per use." },
+      "powers": [
+        { "id": "psi1", "icon": "picn01", "short": "Psi Shield", "name": "Psycho-reflective Screen", "desc": "Protects you from 15% of all combat damage.", "detail": "Duration: 20 seconds + 30 seconds per PSI" },
+        { "id": "psi2", "icon": "picn02", "short": "Reflex", "name": "Neuro-reflex Dampening", "desc": "Eliminates all weapon kickback.", "detail": "Duration: 1 minute + 20 seconds per PSI" },
+        { "id": "psi3", "icon": "picn04", "short": "Psi Pull", "name": "Kinetic Redirection", "desc": "Pulls an object toward you.", "detail": "Duration: 1 second per PSI" },
+        { "id": "psi4", "icon": "picn05", "short": "Agility", "name": "Psychogenic Agility", "desc": "Increases your Agility by 2.", "detail": "Duration: 2 minutes + 1 minute per PSI" },
+        { "id": "psi5", "icon": "picn06", "short": "Cyber", "name": "Psychogenic Cyber Affinity", "desc": "Increases your CYB by 2.", "detail": "Duration: 2 minutes + 1 minute per PSI" },
+        { "id": "psi6", "icon": "picn07", "short": "Cryokinesis", "name": "Projected Cryokinesis", "desc": "Launches a heat-draining projectile at a target. Higher PSI increases damage.", "detail": "" },
+        { "id": "psi7", "icon": "picn21", "short": "Stop Alarm", "name": "Remote Electron Tampering", "desc": "Makes active alarms time out faster.", "detail": "Time Reduction: 5 seconds + 5 seconds per PSI" }
+      ]
+    },
+    {
+      "tier": 2,
+      "maxPsiBonus": 4,
+      "capacity": { "id": "psi8", "icon": "picn08", "name": "Second Tier Neural Capacity", "desc": "This is required for Second Tier psionic disciplines. It increases your maximum psi points by 4. All Second Tier disciplines cost 2 psi points per use." },
+      "powers": [
+        { "id": "psi9", "icon": "picn03", "short": "Anti-Entropy", "name": "Anti-entropic Field", "desc": "While this discipline is active, your ranged weapons cannot break, and their condition will not degrade.", "detail": "Duration: 10 seconds + 20 seconds per PSI" },
+        { "id": "psi10", "icon": "picn22", "short": "Adrenaline", "name": "Adrenaline Overproduction", "desc": "Increases hand-to-hand damage by a factor equal to PSI.", "detail": "Duration: 10 seconds per PSI" },
+        { "id": "psi11", "icon": "picn10", "short": "Rad Shield", "name": "Neural Decontamination", "desc": "Shields you from 80% of radiation damage.", "detail": "Duration: 10 seconds + 5 seconds per PSI" },
+        { "id": "psi12", "icon": "picn11", "short": "Regenerate", "name": "Cerebro-stimulated Regeneration", "desc": "Regenerates lost hit points.", "detail": "Amount Healed: 2 hit points per PSI" },
+        { "id": "psi13", "icon": "picn12", "short": "Strength", "name": "Psychogenic Strength", "desc": "Increases your Strength by 2.", "detail": "Duration: 2 minutes + 1 minute per PSI" },
+        { "id": "psi14", "icon": "picn13", "short": "Recursive Psi", "name": "Recursive Psionic Amplification", "desc": "Increases your Psionics by 2. Psi point costs are doubled while active.", "detail": "Duration: 10 seconds + 10 seconds per PSI" },
+        { "id": "psi15", "icon": "picn15", "short": "Pyro Field", "name": "Localized Pyrokinesis", "desc": "Damages all creatures within a five foot radius. Higher PSI increases damage to enemies.", "detail": "Duration: 15 seconds + 8 seconds per PSI" }
+      ]
+    },
+    {
+      "tier": 3,
+      "maxPsiBonus": 6,
+      "capacity": { "id": "psi16", "icon": "picn16", "name": "Third Tier Neural Capacity", "desc": "This is required for Third Tier psionic disciplines. It increases your maximum psi points by 6. All Third Tier disciplines cost 3 psi points per use." },
+      "powers": [
+        { "id": "psi17", "icon": "picn09", "short": "Duplicate", "name": "Molecular Duplication", "desc": "Use some Nanites to duplicate one ammo clip or hypo.", "detail": "Chance of Success: 30% + 10% per PSI" },
+        { "id": "psi18", "icon": "picn14", "short": "Electron", "name": "Electron Cascade", "desc": "Recharges a single charged item or weapon.", "detail": "Recharge amount: 20% per point of PSI, up to the maximum allowed by your Maintenance skill." },
+        { "id": "psi19", "icon": "picn17", "short": "Reflect", "name": "Energy Reflection", "desc": "Provides 50% immunity to all energy-based damage sources.", "detail": "Duration: 20 seconds per PSI" },
+        { "id": "psi20", "icon": "picn18", "short": "Toxin Shield", "name": "Neural Toxin-blocker", "desc": "Shields you from 100% of toxin absorption.", "detail": "Duration: 10 seconds + 5 seconds per PSI" },
+        { "id": "psi21", "icon": "picn19", "short": "Sense Motion", "name": "Enhanced Motion Sensitivity", "desc": "Shows the location of all nearby creatures.", "detail": "Duration: 30 seconds per PSI" },
+        { "id": "psi22", "icon": "picn20", "short": "Pyrokinesis", "name": "Projected Pyrokinesis", "desc": "Launches a fiery projectile at a target. Higher PSI increases damage.", "detail": "" },
+        { "id": "psi23", "icon": "picn23", "short": "Hypnosis", "name": "Psionic Hypnogenesis", "desc": "Target non-robotic creature will stand still and docile. If the creature takes damage, the effect ends.", "detail": "Duration: 20 seconds per PSI" }
+      ]
+    },
+    {
+      "tier": 4,
+      "maxPsiBonus": 8,
+      "capacity": { "id": "psi24", "icon": "picn24", "name": "Fourth Tier Neural Capacity", "desc": "This is required for Fourth Tier psionic disciplines. It increases your maximum psi points by 8. All Fourth Tier disciplines cost 4 psi points per use." },
+      "powers": [
+        { "id": "psi25", "icon": "picn25", "short": "Invisibility", "name": "Photonic Redirection", "desc": "Renders you invisible to all creatures. Firing a weapon will end the effect.", "detail": "Duration: 5 seconds + 5 seconds per PSI" },
+        { "id": "psi26", "icon": "picn26", "short": "Detect Items", "name": "Remote Pattern Detection", "desc": "Shows the location of many useful items, including nanites, ammo, hypos, implants and audio logs.", "detail": "Duration: 1 minute per PSI" },
+        { "id": "psi27", "icon": "picn27", "short": "Suppression", "name": "Electron Suppression", "desc": "Immobilizes any robotic target.", "detail": "Duration: 3 seconds per PSI" },
+        { "id": "psi28", "icon": "picn28", "short": "Endurance", "name": "Psychogenic Endurance", "desc": "Increases your Endurance by 2.", "detail": "Duration: 2 minutes + 1 minute per PSI" },
+        { "id": "psi29", "icon": "picn29", "short": "Transmute", "name": "Molecular Transmutation", "desc": "Turns ammunition and hypos into nanites.", "detail": "" },
+        { "id": "psi30", "icon": "picn30", "short": "Psi Hack", "name": "Remote Circuitry Manipulation", "desc": "Allows you to hack psionically. Uses half your PSI stat (rounded up) in place of both Hacking skill and CYB stat, and costs psi points instead of nanites.", "detail": "" },
+        { "id": "psi31", "icon": "picn31", "short": "Psi Weapon", "name": "Cerebro-energetic Extension", "desc": "Turns your Psi-Amp into a powerful melee weapon.", "detail": "Duration: 10 seconds per PSI" }
+      ]
+    },
+    {
+      "tier": 5,
+      "maxPsiBonus": 10,
+      "capacity": { "id": "psi32", "icon": "picn32", "name": "Fifth Tier Neural Capacity", "desc": "This is required for Fifth Tier psionic disciplines. It increases your maximum psi points by 10. All Fifth Tier disciplines cost 5 psi points per use." },
+      "powers": [
+        { "id": "psi33", "icon": "picn33", "short": "Adv. Regen", "name": "Advanced Cerebro-stimulated Regeneration", "desc": "Regenerates lost hit points.", "detail": "Amount Healed: 5 hit points + 5 hit points per PSI" },
+        { "id": "psi34", "icon": "picn34", "short": "Transfer", "name": "Soma Transference", "desc": "Drains target non-robotic creature of hit points, and adds those hit points to your total.", "detail": "" },
+        { "id": "psi35", "icon": "picn35", "short": "Relocation", "name": "Instantaneous Quantum Relocation", "desc": "Teleports you to a marked location. If there is no marked location, this will set a marker at your current position.", "detail": "" },
+        { "id": "psi36", "icon": "picn36", "short": "Restructure", "name": "Imposed Neural Restructuring", "desc": "Causes a non-robotic target to become hostile toward all non-human creatures.", "detail": "Duration: 10 seconds per PSI, or until damaged by a human." },
+        { "id": "psi37", "icon": "picn37", "short": "Barrier", "name": "Metacreative Barrier", "desc": "Creates a wall of psionic force directly in front of you.", "detail": "Wall's Hit Points: 150 + 50 per PSI over 5. Duration: 4 minutes" },
+        { "id": "psi38", "icon": "picn38", "short": "Detonation", "name": "External Psionic Detonation", "desc": "Drops a psionic proximity mine. Does no damage to robots, and double damage to psionically sensitive creatures.", "detail": "Duration: 4 minutes" },
+        { "id": "psi39", "icon": "picn39", "short": "Aura", "name": "Psycho-reflective Aura", "desc": "Protects you from 60% of all combat damage.", "detail": "Duration: 10 seconds + 20 seconds per PSI" }
+      ]
+    }
+  ]
+}

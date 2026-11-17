@@ -1,0 +1,44 @@
+{
+  "_comment": "The three training upgrade units. 'min' is the starting value, 'max' the highest value an upgrade unit can train. Descriptions are the game's own help text (STATHELP.STR / SKILHELP.STR).",
+  "attributes": {
+    "title": "Attributes",
+    "unit": "Stats Upgrade Unit",
+    "costKey": "stat",
+    "min": 1,
+    "max": 6,
+    "entries": [
+      { "id": "str", "label": "Strength", "name": "Strength (STR)", "desc": "Strength determines your inventory capacity, and the amount of damage you inflict in hand-to-hand combat. All armor and some weapons have a minimum STR requirement." },
+      { "id": "end", "label": "Endurance", "name": "Endurance (END)", "desc": "Endurance determines your maximum hit points, and your resistance to radiation and toxins." },
+      { "id": "psi", "label": "Psionics", "name": "Psionic Ability (PSI)", "desc": "Psionic Ability determines your skill in using psionic disciplines. The duration, range, and damage inflicted by psionic disciplines can depend on PSI." },
+      { "id": "agi", "label": "Agility", "name": "Agility (AGI)", "desc": "Agility determines your movement speed, and reduces falling damage and weapon kickback." },
+      { "id": "cyb", "label": "Cyber", "name": "Cybernetic Affinity (CYB)", "desc": "Cybernetic Affinity improves your chances of successfully using the Hack, Repair, and Modify skills, and also lessens the number of dangerous nodes." }
+    ]
+  },
+  "weapons": {
+    "title": "Weapon Skills",
+    "unit": "Weapons Upgrade Unit",
+    "costKey": "weapon",
+    "min": 0,
+    "max": 6,
+    "entries": [
+      { "id": "standard", "label": "Standard", "name": "Standard Weapons", "desc": "This skill increases the amount of damage you inflict with standard weapons. Some standard weapons have a minimum skill requirement." },
+      { "id": "energy", "label": "Energy", "name": "Energy Weapons", "desc": "This skill increases the amount of damage you inflict with energy weapons. Some energy weapons have a minimum skill requirement." },
+      { "id": "heavy", "label": "Heavy", "name": "Heavy Weapons", "desc": "This skill increases the amount of damage you inflict with heavy weapons. Some heavy weapons have a minimum skill requirement." },
+      { "id": "exotic", "label": "Exotic", "name": "Exotic Weapons", "desc": "This skill increases the amount of damage you inflict with exotic weapons. Some exotic weapons have a minimum skill requirement." }
+    ]
+  },
+  "tech": {
+    "title": "Tech Skills",
+    "unit": "Tech Upgrade Unit",
+    "costKey": "tech",
+    "min": 0,
+    "max": 6,
+    "entries": [
+      { "id": "hack", "label": "Hack", "name": "Hacking", "desc": "The Hacking skill determines your chances of hacking various computer systems." },
+      { "id": "repair", "label": "Repair", "name": "Repair", "desc": "The Repair skill determines your chances of repairing broken weapons or computer systems." },
+      { "id": "modify", "label": "Modify", "name": "Modify", "desc": "The Modify skill determines your chances of modifying a weapon to an improved state." },
+      { "id": "maintain", "label": "Maintain", "name": "Maintenance", "desc": "The Maintenance skill determines the amount of improvement you can make to the condition of a weapon. You must have a Maintenance Tool to use this skill." },
+      { "id": "research", "label": "Research", "name": "Research", "desc": "The Research skill determines the efficiency of your research. Researching alien organs can yield useful information, and some items cannot be used without first being researched." }
+    ]
+  }
+}

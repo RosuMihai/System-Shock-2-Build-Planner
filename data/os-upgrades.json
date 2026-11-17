@@ -1,0 +1,28 @@
+{
+  "_comment": "O/S Upgrades (TRAITS.STR). The 25th Anniversary Remaster includes the Community Patch, so several upgrades use its stronger effects. 'icon' is the TRAITnn image. 'effect' feeds the planner: maxModules raises the Cyber Module cap, maxHp raises maximum hit points, implantSlots adds implant slots. 'stations' are the four O/S Upgrade Units in play order; each one installs a single upgrade. 'at' places the station's mark on the module bar as a fraction through that level.",
+  "points": 4,
+  "stations": [
+    { "deck": "medsci", "name": "MedSci Deck", "short": "MedSci", "where": "Opposite the Crew Lounge", "at": 0.6 },
+    { "deck": "hydro", "name": "Hydroponics Deck", "short": "Hydro", "where": "Security section near the elevator", "at": 0.09 },
+    { "deck": "rec", "name": "Recreation Deck", "short": "Rec", "where": "TriOp Galleria, ground floor", "at": 0.55 },
+    { "deck": "rick", "name": "UNN Rickenbacker", "short": "Rick", "where": "Pod 1, top of the broken ladder", "at": 0.25 }
+  ],
+  "upgrades": [
+    { "id": "metabolism", "name": "Strong Metabolism", "icon": "trait01", "desc": "Damage from radiation and toxins is reduced by 25%. Alcohol and cigarettes no longer have penalties." },
+    { "id": "pharmo", "name": "Pharmo-Friendly", "icon": "trait02", "desc": "Hypos (except anti-toxin) and annelid psi organs give 20% more benefit and take effect 20% faster." },
+    { "id": "packrat", "name": "Pack-Rat", "icon": "trait03", "desc": "Adds an extra column of inventory slots." },
+    { "id": "speedy", "name": "Speedy", "icon": "trait04", "desc": "Movement speed is increased by 15%. Doesn't count toward Agility requirements." },
+    { "id": "sharpshooter", "name": "Sharpshooter", "icon": "trait05", "desc": "Each shot with a ranged (non-psionic) weapon does more damage: 15% according to the game's text." },
+    { "id": "naturally", "name": "Naturally Able", "icon": "trait06", "desc": "One-time bonus of 20 Cyber Modules (8 in the original game).", "effect": { "maxModules": 20 } },
+    { "id": "cyberenh", "name": "Cybernetically Enhanced", "icon": "trait07", "desc": "Allows the use of two implants at once.", "effect": { "implantSlots": 1 } },
+    { "id": "tank", "name": "Tank", "icon": "trait08", "desc": "Increases maximum hit points by 10 (5 in the original game).", "effect": { "maxHp": 10 } },
+    { "id": "lethal", "name": "Lethal Weapon", "icon": "trait09", "desc": "Increases all hand-to-hand damage by 35%." },
+    { "id": "security", "name": "Security Expert", "icon": "trait10", "desc": "+2 Hacking on security computers, if you already have at least 1 point of Hacking. Robots can't see you while security is hacked." },
+    { "id": "smasher", "name": "Smasher", "icon": "trait11", "desc": "Melee weapons can be charged for a stronger overhand attack." },
+    { "id": "assimilation", "name": "Cyber-Assimilation", "icon": "trait12", "desc": "Destroyed robots always leave a Diagnostic/Repair Module, which heals 15 hit points." },
+    { "id": "replicator", "name": "Replicator Expert", "icon": "trait13", "desc": "Items in replicators cost 20% less, and replicators are 20% easier to hack." },
+    { "id": "powerpsi", "name": "Power Psi", "icon": "trait14", "desc": "Psionic burnout no longer damages you or drains your psi points." },
+    { "id": "tinker", "name": "Tinker", "icon": "trait15", "desc": "Weapon modifications cost 50% fewer nanites and are about 20% more effective." },
+    { "id": "spatial", "name": "Spatially Aware", "icon": "trait16", "desc": "The automap is always completely filled in, with enemies and cameras marked, including on the Rickenbacker." }
+  ]
+}

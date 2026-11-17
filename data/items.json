@@ -1,0 +1,170 @@
+{
+  "_comment": "Weapons, armor and implants. 'req' are the minimums needed to use the item ('attributes.str', 'weapons.standard', 'tech.research' ...). 'research' is the Research skill needed before an alien item can be used. 'w'/'h' are the inventory cells the icon occupies; each category's 'rows' is the height of its inventory grid (items fill it column by column). 'tech' lists the Maintain / Modify (1st / 2nd) / Repair skill each weapon needs for upkeep (shown for information only). Implants ('implant': true) can be equipped, 1 slot or 2 with the Cybernetically Enhanced O/S upgrade; 'bonus' adds to those levels when checking other items' requirements, unless 'bonusIgnoredForReq' is set (ExperTech).",
+  "categories": [
+    {
+      "id": "standard",
+      "title": "Standard",
+      "rows": 3,
+      "items": [
+        { "id": "wrench", "name": "Wrench", "icon": "icon_wrench", "w": 1, "h": 3, "type": "Melee weapon",
+          "desc": "A very solid wrench. A heavy maintenance tool that makes an effective makeshift weapon. Needs no weapon skill; damage scales with Strength.",
+          "stats": "Damage 6", "req": [] },
+        { "id": "pistol", "name": "Pistol", "icon": "icn_pist", "w": 1, "h": 3, "type": "Standard weapon",
+          "desc": "Talon M2A3 .45 caliber pistol, the UNN standard-issue sidearm. Accepts standard, armor-piercing and anti-personnel rounds.",
+          "stats": "Damage 4 (single) / 12 (3-shot burst) · Clip 12",
+          "tech": { "maintain": 1, "modify": "1 / 3", "repair": 1 },
+          "req": [ { "key": "weapons.standard", "level": 1 } ] },
+        { "id": "shotgun", "name": "Shotgun", "icon": "icon_shotgun", "w": 1, "h": 3, "type": "Standard weapon",
+          "desc": "A magazine-loaded 10 gauge monster. Fires rifled slugs or anti-personnel shells, with a triple-load shot.",
+          "stats": "Damage 8 (single) / 16 (triple) · Clip 12",
+          "tech": { "maintain": 2, "modify": "1 / 3", "repair": 3 },
+          "req": [ { "key": "weapons.standard", "level": 3 } ] },
+        { "id": "assault", "name": "Assault Rifle", "icon": "assau_i", "w": 1, "h": 3, "type": "Standard weapon",
+          "desc": "M-22 Assault Rifle. Uses pistol ammunition with a bigger clip and 25% more damage. Single shot or fully automatic.",
+          "stats": "Damage 10 · Clip 36",
+          "tech": { "maintain": 4, "modify": "2 / 4", "repair": 4 },
+          "req": [ { "key": "attributes.str", "level": 2 }, { "key": "weapons.standard", "level": 6 } ] }
+      ]
+    },
+    {
+      "id": "energy",
+      "title": "Energy",
+      "rows": 3,
+      "items": [
+        { "id": "laserpistol", "name": "Laser Pistol", "icon": "icn_ls", "w": 1, "h": 3, "type": "Energy weapon",
+          "desc": "Apollo H4 argon-suspension laser pistol. Refracted light, a large rechargeable battery and an overcharge setting for tight spots.",
+          "stats": "Damage 2 (single) / 12 (overcharge)",
+          "tech": { "maintain": 1, "modify": "2 / 4", "repair": 1 },
+          "req": [ { "key": "weapons.energy", "level": 1 } ] },
+        { "id": "rapier", "name": "Laser Rapier", "icon": "icn_es", "w": 1, "h": 3, "type": "Energy melee weapon",
+          "desc": "Mark IV laser rapier. A brutally effective melee blade that releases intense refracted light on impact. Needs no ammunition.",
+          "stats": "Damage 11",
+          "req": [ { "key": "attributes.agi", "level": 3 }, { "key": "weapons.energy", "level": 4 } ] },
+        { "id": "emprifle", "name": "EMP Rifle", "icon": "icn_emp", "w": 1, "h": 3, "type": "Energy weapon",
+          "desc": "Dual-circuit EMP rifle. Devastating against robots, cyborgs and turrets, harmless to organic targets.",
+          "stats": "Damage 10 (single) / 15 (overcharge)",
+          "tech": { "maintain": 6, "modify": "3 / 5", "repair": 2 },
+          "req": [ { "key": "weapons.energy", "level": 6 } ] }
+      ]
+    },
+    {
+      "id": "heavy",
+      "title": "Heavy",
+      "rows": 3,
+      "items": [
+        { "id": "grenade", "name": "Grenade Launcher", "icon": "icn_gr", "w": 1, "h": 3, "type": "Heavy weapon",
+          "desc": "TC-11 \"Brick\" grenade launcher. Fires fragmentation, proximity, incendiary, EMP and disruption grenades.",
+          "stats": "Damage 10 - 35 depending on grenade · Clip 6",
+          "tech": { "maintain": 2, "modify": "1 / 3", "repair": 2 },
+          "req": [ { "key": "weapons.heavy", "level": 1 } ] },
+        { "id": "stasis", "name": "Stasis Field Generator", "icon": "icn_sfg", "w": 1, "h": 3, "type": "Heavy weapon",
+          "desc": "Fires a stasis field that freezes targets in place. Uses prisms; the effect weakens with distance.",
+          "stats": "No damage · immobilizes targets",
+          "tech": { "maintain": 3, "modify": "2 / 4", "repair": 6 },
+          "req": [ { "key": "attributes.str", "level": 3 }, { "key": "weapons.heavy", "level": 3 } ] },
+        { "id": "fusion", "name": "Fusion Cannon", "icon": "icn_fsn", "w": 1, "h": 3, "type": "Heavy weapon",
+          "desc": "TC-5 Fusion Cannon. Fires a slow, powerful projectile that explodes on impact. Normal and death mode; uses prisms.",
+          "stats": "Damage 20 (normal) / 30 (death mode)",
+          "tech": { "maintain": 3, "modify": "4 / 6", "repair": 4 },
+          "req": [ { "key": "attributes.str", "level": 4 }, { "key": "weapons.heavy", "level": 6 } ] }
+      ]
+    },
+    {
+      "id": "exotic",
+      "title": "Exotic",
+      "rows": 3,
+      "items": [
+        { "id": "crystal", "name": "Crystal Shard", "icon": "icn_cr", "w": 1, "h": 3, "type": "Exotic melee weapon",
+          "desc": "A long, dangerous fragment of annelid crystal, razor sharp. Must be researched before use.",
+          "stats": "Damage 12",
+          "req": [ { "key": "weapons.exotic", "level": 1 } ], "research": 4 },
+        { "id": "viral", "name": "Viral Proliferator", "icon": "icn_vir", "w": 1, "h": 3, "type": "Exotic weapon",
+          "desc": "Releases a nanite-virus payload tuned against annelids or humans. Hold the trigger; the payload detonates on release. Uses worm clusters.",
+          "stats": "Damage 15 · Clip 8",
+          "tech": { "maintain": 4, "modify": "3 / 5", "repair": 4 },
+          "req": [ { "key": "weapons.exotic", "level": 4 } ], "research": 3 },
+        { "id": "annelid", "name": "Annelid Launcher", "icon": "icn_wm", "w": 1, "h": 3, "type": "Exotic weapon",
+          "desc": "Fires heat-seeking worms that home in on the closest target. Uses worm clusters collected in beakers.",
+          "stats": "Damage 25 · Clip 8",
+          "tech": { "maintain": 4, "modify": "2 / 4", "repair": 5 },
+          "req": [ { "key": "attributes.str", "level": 3 }, { "key": "attributes.agi", "level": 3 }, { "key": "weapons.exotic", "level": 6 } ], "research": 6 }
+      ]
+    },
+    {
+      "id": "psionic",
+      "title": "Psi",
+      "rows": 3,
+      "items": [
+        { "id": "psiamp", "name": "Psi Amp", "icon": "icn_psi", "w": 1, "h": 3, "type": "Psionic amplifier",
+          "desc": "Black-Ops Psionic Amplifier. Channels the psionic disciplines bought at Psi Upgrade Units. Has no requirements itself, but it is useless without at least one discipline.",
+          "stats": "Projects purchased psi disciplines",
+          "req": [], "needsPsi": true }
+      ]
+    },
+    {
+      "id": "armor",
+      "title": "Armor",
+      "rows": 4,
+      "items": [
+        { "id": "light", "name": "Light Combat Armor", "icon": "iarmor1", "w": 2, "h": 2, "type": "Armor",
+          "desc": "Dartech class 1 armor. Kevlar and steel mesh; lightweight, marginally effective protection.",
+          "stats": "20% combat damage reduction",
+          "req": [ { "key": "attributes.str", "level": 2 } ] },
+        { "id": "medium", "name": "Medium Combat Armor", "icon": "armorm_i", "w": 2, "h": 2, "type": "Armor",
+          "desc": "SenniTech class 3 armor. Triple-layered composite resins and polymers, standard light infantry issue.",
+          "stats": "30% combat damage reduction",
+          "req": [ { "key": "attributes.str", "level": 4 } ] },
+        { "id": "heavy", "name": "Heavy Combat Armor", "icon": "armorh_i", "w": 2, "h": 2, "type": "Armor",
+          "desc": "UltraTech class 5 combat armor. Titanium/kevlar panels over a regenerative gel. The best you can get without power.",
+          "stats": "40% combat damage reduction",
+          "req": [ { "key": "attributes.str", "level": 6 } ] },
+        { "id": "powered", "name": "Powered Armor", "icon": "armorr_i", "w": 2, "h": 2, "type": "Powered armor",
+          "desc": "Class 7 armor with a repulsion field. Excellent protection while charged, none when the battery is empty.",
+          "stats": "50% combat damage reduction while powered",
+          "req": [ { "key": "attributes.str", "level": 3 } ] },
+        { "id": "hazard", "name": "Hazard Suit", "icon": "armorv_i", "w": 2, "h": 2, "type": "Environmental armor",
+          "desc": "TriOptimum Zero-Phase hazard armor. Protects against radiation and chemical hazards, but not against combat damage.",
+          "stats": "75% less radiation and toxin intake",
+          "req": [] },
+        { "id": "wormskin", "name": "WormSkin Armor", "icon": "wormski", "w": 2, "h": 2, "type": "Alien armor",
+          "desc": "Tough annelid skin fashioned into a body covering. Boosts PSI but slowly drains psi points. Must be researched.",
+          "stats": "+2 PSI · 20% combat damage reduction · 30% less rad/toxin intake",
+          "req": [ { "key": "attributes.str", "level": 2 } ], "research": 3 }
+      ]
+    },
+    {
+      "id": "implants",
+      "title": "Implants",
+      "rows": 3,
+      "items": [
+        { "id": "brawnboost", "name": "BrawnBoost™ Implant", "icon": "softred", "w": 1, "h": 1, "type": "Implant",
+          "desc": "Stimulates the musculature with electric and magnetic impulses. Burns 1% of its charge every ten seconds.",
+          "stats": "+1 STR", "req": [], "implant": true, "bonus": { "attributes.str": 1 } },
+        { "id": "endurboost", "name": "EndurBoost™ Implant", "icon": "softoran", "w": 1, "h": 1, "type": "Implant",
+          "desc": "Stimulates nerve fibers and muscle tissue and filters fatigue toxins from the blood. Burns 1% of its charge every ten seconds.",
+          "stats": "+1 END", "req": [], "implant": true, "bonus": { "attributes.end": 1 } },
+        { "id": "swiftboost", "name": "SwiftBoost™ Implant", "icon": "softindi", "w": 1, "h": 1, "type": "Implant",
+          "desc": "Speeds up reaction times for the entire body. Burns 1% of its charge every ten seconds.",
+          "stats": "+1 AGI", "req": [], "implant": true, "bonus": { "attributes.agi": 1 } },
+        { "id": "psiboost", "name": "PsiBoost™ Implant", "icon": "softpr", "w": 1, "h": 1, "type": "Implant",
+          "desc": "Keeps neurotransmitter levels optimal for peak neural function. Burns 1% of its charge every ten seconds.",
+          "stats": "+1 PSI", "req": [], "implant": true, "bonus": { "attributes.psi": 1 } },
+        { "id": "labassistant", "name": "LabAssistant™ Implant", "icon": "softgr", "w": 1, "h": 1, "type": "Implant",
+          "desc": "Crigon's least popular implant, kept alive by graduate students. Burns 1% of its charge every ten seconds.",
+          "stats": "+1 Research", "req": [], "implant": true, "bonus": { "tech.research": 1 } },
+        { "id": "expertech", "name": "ExperTech™ Implant", "icon": "softbl", "w": 1, "h": 1, "type": "Implant",
+          "desc": "Boosts technical skills. The bonus does NOT count toward minimum skill requirements. Burns 1% of its charge every ten seconds.",
+          "stats": "+1 Hack, Repair and Modify", "req": [], "implant": true, "bonus": { "tech.hack": 1, "tech.repair": 1, "tech.modify": 1 }, "bonusIgnoredForReq": true },
+        { "id": "wormmind", "name": "WormMind Implant", "icon": "i_mind", "w": 1, "h": 1, "type": "Alien implant",
+          "desc": "When you take damage, one of every four points is subtracted from psi points instead of hit points. Must be researched.",
+          "stats": "25% of damage taken from psi points", "req": [], "research": 3, "implant": true },
+        { "id": "wormblood", "name": "WormBlood Implant", "icon": "i_blood", "w": 1, "h": 1, "type": "Alien implant",
+          "desc": "While active, right-click a pile of worms to heal yourself. Must be researched.",
+          "stats": "Heal from worm piles", "req": [], "research": 4, "implant": true },
+        { "id": "wormheart", "name": "WormHeart Implant", "icon": "i_heart", "w": 1, "h": 1, "type": "Alien implant",
+          "desc": "While powered you take no damage from annelid toxin and regenerate 1 HP every 30 seconds. Releases toxin into your blood when it runs out or is removed. Must be researched.",
+          "stats": "Toxin immunity · slow regeneration", "req": [], "research": 5, "implant": true }
+      ]
+    }
+  ]
+}

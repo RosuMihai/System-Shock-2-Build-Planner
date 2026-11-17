@@ -1,0 +1,48 @@
+{
+  "_comment": "Cyber Module costs per upgrade, taken from the game's gamesys (STATCOST / WSKILLCOST / WTECHCOST / PSICOST) with the difficulty multipliers from DIFFPARAM (Easy 0.85, Normal 1.0, Hard 1.4, Impossible 1.8, rounded down). 'stat' lists the cost of levels 2-6, 'weapon' and 'tech' the cost of levels 1-6, 'psiTier' the cost of Tier 1-5 Neural Capacity and 'psiPower' the cost of one discipline in Tier 1-5.",
+  "maxModules": 882,
+  "defaultDifficulty": "normal",
+  "difficulties": [
+    { "id": "easy", "name": "Easy" },
+    { "id": "normal", "name": "Normal" },
+    { "id": "hard", "name": "Hard" },
+    { "id": "impossible", "name": "Impossible" }
+  ],
+  "_poolsComment": "Maximum hit points = hpBase + hpPerEnd x END; maximum psi points = psiBase + psiPerPsi x PSI + each owned tier's Neural Capacity bonus (psi.json). From the gamesys DIFFPARAM chunk.",
+  "pools": {
+    "easy":       { "hpBase": 45, "hpPerEnd": 10, "psiBase": 10, "psiPerPsi": 16 },
+    "normal":     { "hpBase": 30, "hpPerEnd": 5,  "psiBase": 5,  "psiPerPsi": 10 },
+    "hard":       { "hpBase": 24, "hpPerEnd": 3,  "psiBase": 3,  "psiPerPsi": 8 },
+    "impossible": { "hpBase": 7,  "hpPerEnd": 3,  "psiBase": 1,  "psiPerPsi": 5 }
+  },
+  "tables": {
+    "easy": {
+      "stat": [2, 6, 12, 25, 42],
+      "tech": [8, 4, 6, 10, 21, 42],
+      "weapon": [10, 5, 6, 12, 30, 42],
+      "psiTier": [8, 17, 25, 42, 63],
+      "psiPower": [2, 4, 6, 10, 17]
+    },
+    "normal": {
+      "stat": [3, 8, 15, 30, 50],
+      "tech": [10, 5, 8, 12, 25, 50],
+      "weapon": [12, 6, 8, 15, 36, 50],
+      "psiTier": [10, 20, 30, 50, 75],
+      "psiPower": [3, 5, 8, 12, 20]
+    },
+    "hard": {
+      "stat": [4, 11, 20, 41, 69],
+      "tech": [13, 6, 11, 16, 34, 69],
+      "weapon": [16, 8, 11, 20, 50, 69],
+      "psiTier": [13, 27, 41, 69, 104],
+      "psiPower": [4, 6, 11, 16, 27]
+    },
+    "impossible": {
+      "stat": [5, 14, 26, 53, 89],
+      "tech": [17, 8, 14, 21, 44, 89],
+      "weapon": [21, 10, 14, 26, 64, 89],
+      "psiTier": [17, 35, 53, 89, 134],
+      "psiPower": [5, 8, 14, 21, 35]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "_comment": "Cyber Modules obtainable on each level (objective rewards plus hidden caches), in play order. Command Deck is listed net of the 10 modules SHODAN takes back after Cargo Bay A. Hydroponics uses the 25th Anniversary Remaster's 17-module Toxin-A reward (10 in the original). The Rickenbacker combines Pod 1 (105), Pod 2 (25) and the Bridge (20). Total: 882. The module bar tags each level at its start, labelled with the modules you can have when you arrive; SHODAN (no modules) is the final stop.",
+  "decks": [
+    { "id": "medsci", "number": "1", "name": "MedSci Deck", "short": "MedSci", "modules": 46 },
+    { "id": "eng", "number": "2", "name": "Engineering Deck", "short": "Engineering", "modules": 65 },
+    { "id": "hydro", "number": "3", "name": "Hydroponics Deck", "short": "Hydroponics", "modules": 107 },
+    { "id": "ops", "number": "4", "name": "Operations Deck", "short": "Operations", "modules": 125 },
+    { "id": "rec", "number": "5", "name": "Recreation Deck", "short": "Recreation", "modules": 142 },
+    { "id": "command", "number": "6", "name": "Command Deck", "short": "Command", "modules": 170 },
+    { "id": "rick", "number": "R", "name": "UNN Rickenbacker", "short": "Rickenbacker", "modules": 150 },
+    { "id": "many", "number": "M", "name": "Body of the Many", "short": "The Many", "modules": 77 },
+    { "id": "shodan", "number": "S", "name": "SHODAN", "short": "SHODAN", "modules": 0 }
+  ]
+}

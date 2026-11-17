@@ -1,0 +1,80 @@
+{
+  "_comment": "Character creation at the Ramsey Recruitment Center (CHARGEN.STR, Missions 1-27). Each branch has free basic training, then one of three postings per year for three years. 'grants' adds free levels ('attributes.str', 'weapons.standard', 'tech.hack' ...); 'psi' lists psi.json ids that are granted for free. 'pic' is the mission picture (MissionPicN) shown in the game. 'emblem' is the spinning branch logo shown on the screen above each recruitment door: a 5-frame strip (MARLOG_, NAVLOG_, OSALOG_).",
+  "branches": [
+    {
+      "id": "marine",
+      "name": "UNN Marines",
+      "short": "Marine",
+      "emblem": "marlog",
+      "blurb": "First on the ground in a fight. Marines learn weapons, a technical skill and bulk up their statistics.",
+      "basic": { "name": "Camp Lejeune", "role": "Basic training", "grants": { "weapons.standard": 1 } },
+      "years": [
+        [
+          { "id": "m1", "name": "UNN Gallo", "role": "Ordnance Master's Mate", "pic": "d001", "grants": { "attributes.str": 2 } },
+          { "id": "m2", "name": "Io Survival School", "role": "Survival Training", "pic": "d003", "grants": { "attributes.end": 2 } },
+          { "id": "m3", "name": "Guadalcanal Station", "role": "Zero-Gravity Training", "pic": "d002", "grants": { "attributes.agi": 2 } }
+        ],
+        [
+          { "id": "m4", "name": "UNN Antigua", "role": "Gunnery Mate", "pic": "d004", "grants": { "weapons.energy": 1, "attributes.cyb": 1 } },
+          { "id": "m5", "name": "Asteroid Belt Ore Facility", "role": "Asteroid Pickets", "pic": "d005", "grants": { "weapons.heavy": 1, "attributes.cyb": 1 } },
+          { "id": "m6", "name": "Port MacArthur", "role": "Staff Assistant, Weapons Range", "pic": "d003", "grants": { "weapons.standard": 2 } }
+        ],
+        [
+          { "id": "m7", "name": "UNN Home Office", "role": "Honor Guard, Military Police", "pic": "d003", "grants": { "tech.maintain": 1 } },
+          { "id": "m8", "name": "Polidies Trading Station", "role": "Quash Rebellion", "pic": "d005", "grants": { "tech.modify": 1 } },
+          { "id": "m9", "name": "UNN Antigua", "role": "Ship's Systems Consultant", "pic": "d004", "grants": { "tech.repair": 1 } }
+        ]
+      ]
+    },
+    {
+      "id": "navy",
+      "name": "UNN Navy",
+      "short": "Navy",
+      "emblem": "navlog",
+      "blurb": "The machines have conquered the elements; the Navy conquers the machines. Sailors learn a mix of technical skills and statistics.",
+      "basic": { "name": "Coronado Island", "role": "Basic training", "grants": { "weapons.standard": 1 } },
+      "years": [
+        [
+          { "id": "n1", "name": "UNN Lucille", "role": "Ship's Ops", "pic": "d001", "grants": { "tech.hack": 1, "attributes.str": 1 } },
+          { "id": "n2", "name": "UNN Lucille", "role": "Engineer's Mate", "pic": "d001", "grants": { "tech.repair": 1, "attributes.str": 1 } },
+          { "id": "n3", "name": "UNN Lucille", "role": "Military Police", "pic": "d001", "grants": { "tech.modify": 1, "attributes.str": 1 } }
+        ],
+        [
+          { "id": "n4", "name": "UNN Carfax", "role": "Navigator's Mate", "pic": "d004", "grants": { "attributes.cyb": 2 } },
+          { "id": "n5", "name": "UNN Pierce", "role": "Ordnance Master", "pic": "d006", "grants": { "tech.maintain": 1 } },
+          { "id": "n6", "name": "LaVerne Tactical School", "role": "Tactical Training", "pic": "d003", "grants": { "weapons.standard": 2 } }
+        ],
+        [
+          { "id": "n7", "name": "Marie Curie Research Facility", "role": "Lab Assistant", "pic": "d002", "grants": { "tech.research": 1 } },
+          { "id": "n8", "name": "Io Survival Training Facility", "role": "Survival Training", "pic": "d003", "grants": { "attributes.end": 2 } },
+          { "id": "n9", "name": "Yamamoto Station", "role": "Zero-Gravity Training", "pic": "d002", "grants": { "attributes.agi": 2 } }
+        ]
+      ]
+    },
+    {
+      "id": "osa",
+      "name": "Office of Strategic Alliance",
+      "short": "OSA",
+      "emblem": "osalog",
+      "blurb": "Officially the UNN's research branch, rumoured to be its black ops. Agents learn psionic disciplines and a smattering of statistics.",
+      "basic": { "name": "OSA Preliminary Training", "role": "Basic training", "grants": {}, "psi": ["psi0"] },
+      "years": [
+        [
+          { "id": "o1", "name": "Shao Ling Station", "role": "Sensory Deprivation: Cyber Empathy", "pic": "d005", "grants": {}, "psi": ["psi8", "psi6", "psi5"] },
+          { "id": "o2", "name": "Ru Nang Station", "role": "Sensory Deprivation: Kinetic Empathy", "pic": "d005", "grants": {}, "psi": ["psi8", "psi6", "psi3"] },
+          { "id": "o3", "name": "Chu Lun Station", "role": "Sensory Deprivation: Mass Alteration", "pic": "d005", "grants": {}, "psi": ["psi8", "psi6", "psi1"] }
+        ],
+        [
+          { "id": "o4", "name": "OSA Central Core", "role": "Telepathic Interrogation", "pic": "d006", "grants": { "attributes.psi": 2 } },
+          { "id": "o5", "name": "Ki Luan Station", "role": "Experimental Lab", "pic": "d002", "grants": { "tech.research": 1 } },
+          { "id": "o6", "name": "Io Training Facility", "role": "Tactical Psionic Training", "pic": "d004", "grants": { "attributes.end": 2 } }
+        ],
+        [
+          { "id": "o7", "name": "OSA Central Core", "role": "Field Ops: Anti-Terrorism", "pic": "d006", "grants": { "attributes.str": 1, "attributes.agi": 1, "attributes.cyb": 1 }, "psi": ["psi4"] },
+          { "id": "o8", "name": "OSA Io Field Base", "role": "Field Ops: Selections Group", "pic": "d006", "grants": { "attributes.str": 1, "attributes.agi": 1, "attributes.cyb": 1 }, "psi": ["psi2"] },
+          { "id": "o9", "name": "OSA Io Field Base", "role": "Field Ops: Physical", "pic": "d006", "grants": { "attributes.str": 1, "attributes.agi": 1, "attributes.cyb": 1 }, "psi": ["psi7"] }
+        ]
+      ]
+    }
+  ]
+}

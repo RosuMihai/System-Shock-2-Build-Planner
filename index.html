@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>System Shock 2 Build Planner</title>
+  <meta name="description" content="Character build planner for System Shock 2: 25th Anniversary Remaster. Spend Cyber Modules on stats, weapon skills, tech skills and psi powers.">
+  <meta name="theme-color" content="#07090b">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="System Shock 2 Build Planner">
+  <meta property="og:description" content="Plan a System Shock 2: 25th Anniversary Remaster character: spend Cyber Modules on stats, skills, psi powers and O/S upgrades, then share the build as a link.">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/png" href="assets/ui/shodan-icon.png?v=3">
+  <link rel="apple-touch-icon" href="assets/ui/shodan-icon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="booting">
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/ui/triop.png" alt="TriOptimum" class="brand-icon">
+      <div>
+        <h1>System Shock 2 <span>Build Planner</span></h1>
+        <p class="sub">25th Anniversary Remaster · Cybernetic Upgrade Simulator</p>
+      </div>
+    </div>
+    <div class="controls">
+      <button type="button" class="hud-btn career-btn" id="careerBtn" title="Change your service branch and tours of duty">
+        <span id="careerLabel">Choose career</span>
+      </button>
+      <div class="difficulty" role="radiogroup" aria-label="Difficulty" id="difficulty"></div>
+      <button type="button" class="hud-btn danger" id="resetAll" title="Clear the whole build (upgrades, O/S upgrades, implants and career) and start over">Reset build</button>
+    </div>
+  </header>
+
+  <div class="share-note" id="shareNote" role="status" hidden>
+    <span>You're viewing a build from a link. Your own saved build hasn't been changed.</span>
+    <button type="button" class="hud-btn" id="shareKeep" title="Replace your saved build with this one">Keep this build</button>
+    <button type="button" class="hud-btn" id="shareRestore" title="Go back to your saved build">Restore mine</button>
+  </div>
+
+  <p class="boot-note" role="status">Establishing data link…</p>
+  <noscript><p class="boot-note" style="display:block">This planner needs JavaScript to run.</p></noscript>
+
+  <main>
+    <section class="frame modules-frame" id="modulesFrame" aria-labelledby="modulesTitle">
+      <div class="modules-readout">
+        <h2 class="modules-title" id="modulesTitle">Cybernetic Modules</h2>
+        <div class="readout-line" title="Cyber Modules left to spend, then spent out of the total available">
+          <span class="readout-value" id="remainValue">882</span>
+          <span class="readout-label">left</span>
+          <span class="readout-unit"><span id="spentValue">0</span> / <span id="maxValue">882</span></span>
+          <span class="readout-label">used</span>
+        </div>
+        <div class="pools">
+          <div class="pool hp" id="hpPool" role="img">
+            <div class="pool-bar"><div class="pool-fill" id="hpFill"></div></div>
+            <span class="pool-num" id="hpValue">0</span>
+          </div>
+          <div class="pool psi" id="psiPool" role="img">
+            <div class="pool-bar"><div class="pool-fill" id="psiFill"></div></div>
+            <span class="pool-num" id="psiValue">0</span>
+          </div>
+        </div>
+      </div>
+      <div class="module-bar" id="moduleBar">
+        <div class="bar-track">
+          <div class="bar-fill" id="barFill"></div>
+          <div class="bar-markers" id="barMarkers"></div>
+        </div>
+        <div class="bar-labels" id="barLabels"></div>
+      </div>
+    </section>
+
+    <section class="stations" aria-label="Upgrade units">
+      <div class="station" id="station-attributes"></div>
+      <div class="station" id="station-tech"></div>
+      <div class="station" id="station-weapons"></div>
+      <div class="station" id="station-psi"></div>
+      <div class="os-row">
+        <div class="station" id="station-os"></div>
+        <div class="station implants-station">
+          <div class="station-title"><h2>Implants</h2></div>
+          <div class="frame implants-box" id="implantsBox"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame inventory-frame" aria-labelledby="invTitle">
+      <h2 class="frame-tab" id="invTitle">Inventory</h2>
+      <div class="inv-legend">
+        <span><i class="dot ok"></i>Requirements met</span>
+        <span><i class="dot no"></i>Greyed out: Requirements not met</span>
+      </div>
+      <div class="inventory" id="inventory"></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    Fan-made build planner. Game art and text © Nightdive Studios / Irrational Games / Looking Glass Studios.
+  </footer>
+
+  <div class="modal" id="careerModal" role="dialog" aria-modal="true" aria-labelledby="careerTitle" hidden>
+    <div class="modal-box frame">
+      <h2 class="frame-tab" id="careerTitle">Ramsey Recruitment Center</h2>
+      <button type="button" class="modal-close" id="careerClose" aria-label="Close" hidden>×</button>
+      <ol class="career-steps" id="careerSteps"></ol>
+      <div class="career-intro" id="careerIntro"></div>
+      <div class="career-cards" id="careerCards"></div>
+      <div class="career-foot">
+        <button type="button" class="hud-btn" id="careerBack">Back</button>
+        <div class="career-summary" id="careerSummary"></div>
+        <button type="button" class="hud-btn confirm" id="careerConfirm" hidden>Report for duty</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <div class="load-error" id="loadError" hidden></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
