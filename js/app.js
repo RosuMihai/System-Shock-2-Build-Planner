@@ -505,26 +505,29 @@
   const HOLD_MS = 450, GHOST_MS = 700;
   function onPress(node, tap, hold) {
     let timer = null, armed = false, touching = false, held = false;
-    let heldAt = 0, touchEndAt = 0, x0 = 0, y0 = 0;
+    let touchEndAt = 0, x0 = 0, y0 = 0;
     const disarm = () => { armed = false; clearTimeout(timer); timer = null; };
-    const fireHold = () => {
-      const now = Date.now();
-      if (now - heldAt < 800) return;       // long press and contextmenu both arrived
-      heldAt = now;
+    // A long press counts once, even if both our timer and the browser's own
+    // contextmenu fire for it; `held` marks that this touch already refunded.
+    const touchHold = () => {
+      if (held) return;
+      held = true;
       hold();
     };
     node.addEventListener("contextmenu", ev => {
       ev.preventDefault();
       disarm();
-      if (touching) held = true;
-      fireHold();
+      // contextmenu during (or just after) a touch is the long press again;
+      // from a mouse it is a right-click, and every right-click refunds.
+      if (touching || Date.now() - touchEndAt < GHOST_MS) touchHold();
+      else hold();
     });
     node.addEventListener("pointerdown", ev => {
       if (ev.pointerType === "mouse") return;
       disarm();
       touching = true; armed = true; held = false;
       x0 = ev.clientX; y0 = ev.clientY;
-      timer = setTimeout(() => { timer = null; armed = false; held = true; fireHold(); }, HOLD_MS);
+      timer = setTimeout(() => { timer = null; armed = false; touchHold(); }, HOLD_MS);
     });
     node.addEventListener("pointermove", ev => {
       if (armed && Math.hypot(ev.clientX - x0, ev.clientY - y0) > 10) disarm();   // a scroll, not a press
