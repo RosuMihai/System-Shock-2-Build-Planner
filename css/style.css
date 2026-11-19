@@ -393,6 +393,7 @@ main {
 .bar-label b { display: block; font-family: var(--font-head); font-weight: 400; font-size: 11px; color: #a9b0b8; }
 .bar-label.reached { color: var(--hud-text); }
 .bar-label.reached b { color: var(--hud-bright); }
+.bar-label .bar-career { color: var(--amber); }
 .bar-label.edge-right { transform: translateX(-100%); text-align: right; }
 .bar-label.edge-left { transform: none; text-align: left; }
 
@@ -987,22 +988,32 @@ body.modal-open { overflow: hidden; }
 .c-name { font-family: var(--font-head); font-size: 14px; letter-spacing: .06em; color: var(--white); text-transform: uppercase; }
 .c-role { font-size: 15px; color: #9fb9b0; line-height: 1.2; }
 .c-gain { margin-top: auto; padding-top: 4px; font-weight: 700; color: var(--hud-bright); line-height: 1.25; }
+/* module value of a career choice, in the amber of the career pips */
+.c-value { font-size: 14px; letter-spacing: .04em; color: #c9a46a; }
+.c-value b, .r-value b { font-family: var(--font-head); font-weight: 400; color: var(--amber); }
+.r-value { font-size: 14px; color: #c9a46a; white-space: nowrap; text-align: right; }
 
 .career-cards.record { grid-template-columns: 1fr; gap: 6px; }
 .record-row {
   display: grid;
-  grid-template-columns: 70px 1fr 1.2fr;
+  grid-template-columns: 70px 1fr 1.2fr auto;
   gap: 12px; align-items: center;
   padding: 10px 12px;
   background: #01241a;
   border: 1px solid #0b4d3a;
 }
+.record-row.total { background: #2a1d06; border-color: #6b4a14; }
+.record-row.total .r-year { color: var(--amber); }
+.record-row.total .r-value { font-size: 16px; }
+.record-row.total .r-value b { font-size: 18px; }
 .r-year { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--hud-dim); }
 .r-name { color: var(--white); }
 .r-name small { display: block; color: #9fb9b0; font-size: 14px; }
 .r-gain { color: var(--hud-bright); font-weight: 700; }
 @media (max-width: 600px) {
   .record-row { grid-template-columns: 1fr; gap: 2px; }
+  .r-value { text-align: left; }
+  .record-row.total .r-gain { display: none; }
 }
 
 .career-foot {

@@ -319,6 +319,28 @@
 
   const psiCost = p => (p.isCap ? table().psiTier[p.tier] : table().psiPower[p.tier]);
 
+  // What one career step's free bonuses would cost in Cyber Modules on the
+  // current difficulty. `got` holds the levels earlier steps already gave (each
+  // level costs more than the last), and this step's levels are added to it.
+  function stepValue(st, got = {}) {
+    let sum = 0;
+    Object.entries(st.grants || {}).forEach(([k, v]) => {
+      const g = k.split(".")[0];
+      const from = DB.disciplines[g].min + (got[k] || 0);
+      for (let l = from + 1; l <= from + v; l++) sum += levelCost(g, l) || 0;
+      got[k] = (got[k] || 0) + v;
+    });
+    (st.psi || []).forEach(id => { sum += psiCost(DB.psiById[id]); });
+    return sum;
+  }
+
+  // The module value of each step of a career path, in order, and their total.
+  function careerValue(career = state.career) {
+    const got = {};
+    const steps = career ? careerGrants(career).steps.map(st => stepValue(st, got)) : [];
+    return { steps, total: steps.reduce((a, v) => a + v, 0) };
+  }
+
   function psiSpent() {
     let sum = 0;
     DB.psiFlat.forEach(p => {
@@ -713,6 +735,9 @@
     const starts = totals.map((_, i) => (i > 0 ? totals[i - 1] : 0));
     ui.deckTotals = totals;
     ui.tagPos = starts;
+    // the career's free bonuses, priced in modules, ride next to the first tag
+    const careerVal = careerValue().total;
+    ui.careerVal = careerVal;
     DB.decks.decks.forEach((d, i) => {
       const pct = (starts[i] / cap) * 100;
       ui.markers[i].style.left = pct + "%";
@@ -720,10 +745,12 @@
       lab.style.left = pct + "%";
       lab.classList.toggle("edge-left", pct < 3);
       lab.classList.toggle("edge-right", pct > 97);
-      lab.firstChild.textContent = starts[i];
-      ui.labelTips[i] = [d.name, d.modules
+      const extra = i === 0 && careerVal > 0;
+      lab.firstChild.innerHTML = starts[i] + (extra ? ` <span class="bar-career">(${careerVal})</span>` : "");
+      ui.labelTips[i] = [d.name, (d.modules
         ? `Arrive with up to ${starts[i]} modules; ${d.modules} more to find here.`
-        : `The final confrontation, with up to ${starts[i]} modules.`];
+        : `The final confrontation, with up to ${starts[i]} modules.`)
+        + (extra ? ` Your career bonuses are worth ${careerVal} modules on this difficulty.` : "")];
     });
     DB.os.stations.forEach((st, k) => {
       const i = st.deckIndex;
@@ -788,8 +815,10 @@
     const capChanged = ui.lastCap !== cap || ui.lastOs !== state.os.join();
     ui.lastCap = cap;
     ui.lastOs = state.os.join();
+    const lastCareerVal = ui.careerVal;
     positionBar();
-    if (capChanged) layoutBarLabels();
+    // the first tag gets wider or narrower with the career's value
+    if (capChanged || ui.careerVal !== lastCareerVal) layoutBarLabels();
 
     const fill = document.getElementById("barFill");
     fill.style.width = Math.min(100, (spent / cap) * 100) + "%";
@@ -1481,6 +1510,8 @@
     confirm.hidden = career.step !== 4;
     back.disabled = career.step === 0;
     const branch = DB.careers.branches.find(b => b.id === career.branch);
+    const diffName = DB.costs.difficulties.find(d => d.id === state.difficulty).name;
+    const valueTag = n => `<span class="c-value" title="What these bonuses would cost in Cyber Modules on ${esc(diffName)}">Worth <b>${n}</b> modules</span>`;
 
     if (career.step === 0) {
       intro.innerHTML = `<p>Four years before the Von Braun. Choose the branch of service you enlist in; it decides the bonuses your character starts with.</p>`;
@@ -1489,7 +1520,8 @@
           `<span class="emblem-coin" style="background-image:url('assets/career/${b.emblem}.png')" aria-hidden="true"></span>
            <span class="c-name">${esc(b.name)}</span>
            <span class="c-role">${esc(b.blurb)}</span>
-           <span class="c-gain">${esc(b.basic.name)}: ${grantLabels(b.basic).map(esc).join(", ")}</span>`);
+           <span class="c-gain">${esc(b.basic.name)}: ${grantLabels(b.basic).map(esc).join(", ")}</span>
+           ${valueTag(stepValue(b.basic))}`);
         card.addEventListener("click", () => {
           if (career.branch !== b.id) career.picks = [];
           career.branch = b.id;
@@ -1501,12 +1533,16 @@
     } else if (career.step <= 3) {
       const y = career.step - 1;
       intro.innerHTML = `<p><b>${esc(branch.name)}</b> · Year ${career.step} of your tour of duty. Pick your posting.</p>`;
+      // each posting is priced on top of the levels the earlier steps gave
+      const got = {};
+      [branch.basic, ...branch.years.slice(0, y).map((opts, j) => opts[career.picks[j]])].forEach(st => stepValue(st, got));
       branch.years[y].forEach((opt, k) => {
         const card = el("button", { type: "button", class: "career-card" + (career.picks[y] === k ? " selected" : "") },
           `<img src="assets/career/${opt.pic}.png" alt="" class="pic">
            <span class="c-name">${esc(opt.name)}</span>
            <span class="c-role">${esc(opt.role)}</span>
-           <span class="c-gain">${grantLabels(opt).map(esc).join("<br>")}</span>`);
+           <span class="c-gain">${grantLabels(opt).map(esc).join("<br>")}</span>
+           ${valueTag(stepValue(opt, { ...got }))}`);
         card.addEventListener("click", () => {
           career.picks[y] = k;
           career.picks.length = Math.max(career.picks.length, y + 1);
@@ -1516,15 +1552,23 @@
         cards.appendChild(card);
       });
     } else {
-      const g = careerGrants({ branch: career.branch, picks: career.picks });
+      const path = { branch: career.branch, picks: career.picks };
+      const g = careerGrants(path);
+      const v = careerValue(path);
       intro.innerHTML = `<p><b>${esc(branch.name)}</b> · Service record complete. These bonuses are free and don't cost Cyber Modules.${career.dismissable ? " Upgrades you've already bought are kept." : ""}</p>`;
       cards.classList.add("record");
       g.steps.forEach((st, i) => {
         cards.appendChild(el("div", { class: "record-row" },
           `<span class="r-year">${i === 0 ? "Basic" : `Year ${i}`}</span>
            <span class="r-name">${esc(st.name)}<small>${esc(st.role)}</small></span>
-           <span class="r-gain">${grantLabels(st).map(esc).join(", ") || "—"}</span>`));
+           <span class="r-gain">${grantLabels(st).map(esc).join(", ") || "—"}</span>
+           <span class="r-value"><b>${v.steps[i]}</b> modules</span>`));
       });
+      cards.appendChild(el("div", { class: "record-row total" },
+        `<span class="r-year">Total</span>
+         <span class="r-name">Free Cyber Modules<small>Priced on ${esc(diffName)}</small></span>
+         <span class="r-gain"></span>
+         <span class="r-value"><b>${v.total}</b> modules</span>`));
     }
 
     // running totals
