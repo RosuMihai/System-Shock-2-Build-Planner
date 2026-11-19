@@ -1566,7 +1566,7 @@
       });
       cards.appendChild(el("div", { class: "record-row total" },
         `<span class="r-year">Total</span>
-         <span class="r-name">Free Cyber Modules<small>Priced on ${esc(diffName)}</small></span>
+         <span class="r-name">Cyber Modules Value<small>Priced on ${esc(diffName)}</small></span>
          <span class="r-gain"></span>
          <span class="r-value"><b>${v.total}</b> modules</span>`));
     }
