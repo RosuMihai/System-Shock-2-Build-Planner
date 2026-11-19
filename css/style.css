@@ -823,6 +823,9 @@ main {
   line-height: 1.25;
 }
 .tooltip[hidden] { display: none; }
+/* on touch screens the tooltip catches taps (a tap closes it) instead of
+   letting them through to whatever lies underneath */
+.tooltip.tappable { pointer-events: auto; cursor: pointer; -webkit-user-select: none; user-select: none; }
 .tt-head {
   padding: 4px 10px;
   background: linear-gradient(180deg, #036b4d, #00402e);

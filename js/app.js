@@ -587,7 +587,7 @@
     node.setAttribute("data-tip", "");
     node.addEventListener("mouseenter", show);
     node.addEventListener("mousemove", moveTooltip);
-    node.addEventListener("mouseleave", hideTooltip);
+    node.addEventListener("mouseleave", leaveTooltip);
     node.addEventListener("click", show);
   }
 
@@ -1206,7 +1206,7 @@
         cell.appendChild(el("img", { src: `assets/items/${item.icon}.png`, alt: "", loading: "lazy" }));
         cell.addEventListener("mouseenter", ev => showTooltip(item, ev));
         cell.addEventListener("mousemove", moveTooltip);
-        cell.addEventListener("mouseleave", hideTooltip);
+        cell.addEventListener("mouseleave", leaveTooltip);
         cell.addEventListener("focus", () => showTooltip(item, null, cell));
         cell.addEventListener("blur", hideTooltip);
         if (item.implant) {
@@ -1261,7 +1261,7 @@
       });
       slot.setAttribute("data-tip", "");
       slot.addEventListener("mousemove", moveTooltip);
-      slot.addEventListener("mouseleave", hideTooltip);
+      slot.addEventListener("mouseleave", leaveTooltip);
       grid.appendChild(slot);
       return slot;
     });
@@ -1374,10 +1374,15 @@
       tech + equip;
   }
 
+  // When a tapped tooltip disappears, the browser can report the finger's spot
+  // as "hovering" whatever was under it; that must not open its tooltip.
+  const hoverAfterTipTap = ev => !!(ev && ev.type === "mouseenter" && ui.tipTapClosed && performance.now() - ui.tipTapClosed < 700);
+
   function showTooltip(item, ev, anchor) {
+    if (hoverAfterTipTap(ev)) return;
     ui.tipItem = item;
     fillTooltip(item);
-    ui.tooltip.hidden = false;
+    openTooltip();
     highlightReqs(item, true);
     if (ev) moveTooltip(ev);
     else if (anchor) {
@@ -1424,10 +1429,25 @@
 
   // A plain title + text tooltip, in the same style as the item tooltips.
   function showTextTooltip(title, text, ev) {
+    if (hoverAfterTipTap(ev)) return;
     hideTooltip();
     ui.tooltip.innerHTML = `<div class="tt-head">${esc(title)}</div><div class="tt-desc">${esc(text)}</div>`;
-    ui.tooltip.hidden = false;
+    openTooltip();
     moveTooltip(ev);
+  }
+
+  // With a mouse the tooltip lets the pointer through; on touch screens it
+  // takes the tap itself, so tapping it closes it rather than pressing what's under it.
+  function openTooltip() {
+    ui.tooltip.classList.toggle("tappable", touchUi());
+    ui.tooltip.hidden = false;
+  }
+
+  // Leaving the element closes its tooltip, unless the pointer moved onto the
+  // tooltip itself (a tap on a touch screen's tooltip), which closes it on its own.
+  function leaveTooltip(ev) {
+    if (ev.relatedTarget && ui.tooltip.contains(ev.relatedTarget)) return;
+    hideTooltip();
   }
 
   function hideTooltip() {
@@ -1670,8 +1690,19 @@
     window.addEventListener("hashchange", onHashChange);
     // on touch screens nothing "leaves" an element, so a tap elsewhere closes the tooltip
     document.addEventListener("pointerdown", ev => {
-      if (ev.pointerType !== "mouse" && !ev.target.closest(".inv-item, [data-tip]")) hideTooltip();
+      if (ev.pointerType !== "mouse" && !ev.target.closest(".inv-item, [data-tip], .tooltip")) hideTooltip();
     });
+    // a tap on the tooltip itself only closes it. It closes on click, not on
+    // pointerdown: hiding it mid-tap would hand the tap to the element below.
+    ui.tooltip.addEventListener("click", ev => {
+      ev.stopPropagation();
+      ui.tipTapClosed = performance.now();
+      hideTooltip();
+    });
+    ui.tooltip.addEventListener("contextmenu", ev => ev.preventDefault());
+    // pressing the tooltip mustn't take focus from the item it describes: that
+    // item's blur would close the tooltip mid-tap and hand the tap to what's below
+    ui.tooltip.addEventListener("mousedown", ev => ev.preventDefault());
     if (!state.career) openCareer(false);
   }
 
