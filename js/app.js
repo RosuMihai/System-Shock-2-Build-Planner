@@ -846,8 +846,9 @@
     const diff = diffName();
     document.getElementById("hpValue").textContent = s.hp;
     document.getElementById("psiValue").textContent = s.pp;
-    document.getElementById("hpFill").style.width = (s.hp / s.hpCap) * 100 + "%";
-    document.getElementById("psiFill").style.width = (s.pp / s.ppCap) * 100 + "%";
+    // the fill is clipped rather than resized, so the bar art keeps its end cap
+    document.getElementById("hpFill").style.setProperty("--fill", (s.hp / s.hpCap) * 100 + "%");
+    document.getElementById("psiFill").style.setProperty("--fill", (s.pp / s.ppCap) * 100 + "%");
     ui.poolTips = {
       hp: [`Maximum hit points: ${s.hp}`,
         `${diff}: ${s.p.hpBase} + ${s.p.hpPerEnd} × END (${s.end}${s.endImp ? `, +${s.endImp} implant` : ""})${s.hpBonus ? ` + ${s.hpBonus} from Tank` : ""}\nUp to ${s.hpCap} with END ${s.endTop} (6 + EndurBoost) and Tank`],

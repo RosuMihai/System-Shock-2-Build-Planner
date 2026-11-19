@@ -272,21 +272,27 @@ main {
 .pool-bar {
   position: relative;
   width: 160px; height: 28px;
+  min-width: 58px;
   flex: none;
 }
+/* The 160x28 art is drawn as three slices: the icon (first 28px) and the end
+   block (last 30px) always keep their true size, and only the plain bar in
+   between stretches or shrinks, so a narrower bar is never squashed. */
 .pool-bar::before, .pool-fill {
-  background: url("../assets/ui/hpbar.png") no-repeat left center / 160px 28px;
+  position: absolute; inset: 0;
+  border-style: solid;
+  border-width: 0 30px 0 28px;
+  border-image: url("../assets/ui/hpbar.png") 0 30 0 28 fill / 0 30px 0 28px stretch;
 }
-.pool.psi .pool-bar::before, .pool.psi .pool-fill { background-image: url("../assets/ui/psibar.png"); }
+.pool.psi .pool-bar::before, .pool.psi .pool-fill { border-image-source: url("../assets/ui/psibar.png"); }
 .pool-bar::before {
   content: "";
-  position: absolute; inset: 0;
   filter: brightness(.28) saturate(.5);
 }
+/* the lit part: the same art, clipped from the right to the fill level */
 .pool-fill {
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 0;
-  transition: width .25s ease-out;
+  clip-path: inset(0 calc(100% - var(--fill, 0%)) 0 0);
+  transition: clip-path .25s ease-out;
 }
 .pool-num {
   min-width: 42px;
@@ -1079,8 +1085,7 @@ body.booting main, body.booting .foot { display: none; }
     overflow: hidden; clip-path: inset(50%); white-space: nowrap;
   }
   .pools { flex-direction: row; flex-wrap: wrap; gap: 4px 12px; margin-top: 2px; }
-  .pool-bar { width: 96px; }
-  .pool-bar::before, .pool-fill { background-size: 96px 28px; }
+  .pool-bar { width: 120px; }
   .bar-label .nm { display: none; }
   .bar-track { height: 24px; }
 }
@@ -1103,6 +1108,10 @@ body.booting main, body.booting .foot { display: none; }
   .readout-value.deck { font-size: 16px; }
   .modules-frame { padding: 6px 14px 2px; }
   .modules-frame .modules-readout { flex: 1 1 100%; min-width: 0; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 0 18px; }
+  /* HP and psi share the full row; each bar takes the room its number box leaves */
+  .pools { flex: 1 1 100%; flex-wrap: nowrap; }
+  .pool { flex: 1 1 0; min-width: 0; }
+  .pool-bar { flex: 1 1 auto; width: auto; max-width: 160px; }
   /* armor: three per column instead of two, so the grid fits a phone screen */
   .inv-group[data-cat="armor"] .inv-grid { grid-template-rows: repeat(6, 68px) !important; }
 
@@ -1140,11 +1149,6 @@ body.booting main, body.booting .foot { display: none; }
 @media (max-width: 410px) {
   .stations { grid-template-columns: 340px; }
   .station { zoom: .9; }
-}
-@media (max-width: 380px) {
-  /* both pools stay on one row */
-  .pool-bar { width: 70px; }
-  .pool-bar::before, .pool-fill { background-size: 70px 28px; }
 }
 @media (max-width: 355px) {
   .stations { grid-template-columns: 302px; }
