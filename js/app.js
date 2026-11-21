@@ -1537,11 +1537,11 @@
       intro.innerHTML = `<p>Four years before the Von Braun. Choose the branch of service you enlist in; it decides the bonuses your character starts with.</p>`;
       DB.careers.branches.forEach(b => {
         const card = el("button", { type: "button", class: "career-card branch" + (b.id === career.branch ? " selected" : "") },
-          `<span class="emblem-coin" style="background-image:url('assets/career/${b.emblem}.png')" aria-hidden="true"></span>
+          `<span class="c-side"><span class="emblem-coin" style="background-image:url('assets/career/${b.emblem}.png')" aria-hidden="true"></span>
+           ${valueTag(stepValue(b.basic))}</span>
            <span class="c-name">${esc(b.name)}</span>
            <span class="c-role">${esc(b.blurb)}</span>
-           <span class="c-gain">${esc(b.basic.name)}: ${grantLabels(b.basic).map(esc).join(", ")}</span>
-           ${valueTag(stepValue(b.basic))}`);
+           <span class="c-gain">${esc(b.basic.name)}: ${grantLabels(b.basic).map(esc).join(", ")}</span>`);
         card.addEventListener("click", () => {
           if (career.branch !== b.id) career.picks = [];
           career.branch = b.id;
@@ -1558,11 +1558,11 @@
       [branch.basic, ...branch.years.slice(0, y).map((opts, j) => opts[career.picks[j]])].forEach(st => stepValue(st, got));
       branch.years[y].forEach((opt, k) => {
         const card = el("button", { type: "button", class: "career-card" + (career.picks[y] === k ? " selected" : "") },
-          `<img src="assets/career/${opt.pic}.png" alt="" class="pic">
+          `<span class="c-side"><img src="assets/career/${opt.pic}.png" alt="" class="pic">
+           ${valueTag(stepValue(opt, { ...got }))}</span>
            <span class="c-name">${esc(opt.name)}</span>
            <span class="c-role">${esc(opt.role)}</span>
-           <span class="c-gain">${grantLabels(opt).map(esc).join("<br>")}</span>
-           ${valueTag(stepValue(opt, { ...got }))}`);
+           <span class="c-gain">${grantLabels(opt).map(esc).join("<br>")}</span>`);
         card.addEventListener("click", () => {
           career.picks[y] = k;
           career.picks.length = Math.max(career.picks.length, y + 1);

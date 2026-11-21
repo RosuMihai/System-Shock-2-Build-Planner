@@ -993,6 +993,10 @@ body.modal-open { overflow: hidden; }
 .c-gain { margin-top: auto; padding-top: 4px; font-weight: 700; color: var(--hud-bright); line-height: 1.25; }
 /* module value of a career choice, in the amber of the career pips */
 .c-value { font-size: 14px; letter-spacing: .04em; color: #c9a46a; }
+/* picture + value: on the tall desktop cards the group dissolves and the value
+   drops to the bottom of the card; on phones it's the left column */
+.c-side { display: contents; }
+.career-card .c-value { order: 1; }
 .c-value b, .r-value b { font-family: var(--font-head); font-weight: 400; color: var(--amber); }
 .r-value { font-size: 14px; color: #c9a46a; white-space: nowrap; text-align: right; }
 
@@ -1163,8 +1167,10 @@ body.booting main, body.booting .foot { display: none; }
     padding: 10px;
   }
   .career-card.branch { grid-template-columns: 64px 1fr; }
-  .career-card .pic, .career-card .emblem-coin { grid-row: 1 / span 3; }
+  /* the picture with the module value right under it */
+  .c-side { display: flex; flex-direction: column; gap: 4px; grid-row: 1 / span 3; align-self: start; }
   .career-card .emblem-coin { --s: 64px; }
+  .career-card .c-value { font-size: 13px; letter-spacing: 0; line-height: 1.15; text-align: center; }
   .c-gain { margin-top: 2px; padding-top: 0; }
 }
 
