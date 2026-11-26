@@ -2,6 +2,8 @@
 
 A single-page build planner for *System Shock 2: 25th Anniversary Remaster*, written in plain HTML5, CSS3 and JavaScript. It uses the game's own upgrade-unit art.
 
+**Open the planner: [rosumihai.github.io/System-Shock-2-Build-Planner](https://rosumihai.github.io/System-Shock-2-Build-Planner/)**
+
 ## Using it
 
 - On the first visit (or after a reset) the **Ramsey Recruitment Center** opens. Pick a branch (Marines, Navy, OSA) and one posting for each of the three years. Those bonuses are free, and an amber pip marks them on the upgrade units. The career button in the top bar changes your path later and keeps the upgrades you bought.
